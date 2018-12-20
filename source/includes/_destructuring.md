@@ -158,21 +158,61 @@ assert domain == "mail.com"
 
 ## Nesting
 
+Conceptually, the same ideas hold when nesting different kinds of destructuring. Imagine walking inwards from the entire left and right expressions, applying the appropriate rules, whether from lists or maps or strings.
+
 ```python
 data = {"key1": [1, 2, 3, 4],
         "key2": [1, 2, 3]}
 
 {"key1": a, b, *c,
  "key2": d, e, *f} = data
-
-# now a == 1, b == 2, c == [3, 4],
-# and d == 1, e == 2, f == [3]
 ```
+
+Here we have list destructuring inside map destructuring:
+
+| variable | value  |
+| :------- | :----- |
+| a        | 1      |
+| b        | 2      |
+| c        | [3, 4] |
+| d        | 1      |
+| e        | 2      |
+| f        | [3]    |
 
 ```python
 data = [1, {"some": "values", "other": "things"}, 2, 3, 4]
 
 a, {"some": v}, *b, c = data
-
-# now a == 1, v == "values", b == [2, 3], c == 4
 ```
+
+Map destructuring inside list destructuring:
+
+| variable | value    |
+| :------- | :------- |
+| a        | 1        |
+| v        | "values" |
+| b        | [2, 3]   |
+| c        | 4        |
+
+```python
+data = {"id": "00000000",
+        "name": "Jane Smith",
+        "homepage": "blog.janesmith.com",
+        "tags": ["blog", "tech", "futurism"]}
+
+{"name": [first_name, " ", last_name],
+ "homepage": [subdomain, ".", domain, ".", tld],
+ "tags": [category, *other_tags]} = data
+```
+
+List and string destructuring inside map destructuring. Note the use of brackets to group the string destructuring. TODO: explore alternative syntax
+
+| variable   | value                |
+| :--------- | :------------------- |
+| first_name | "Jane"               |
+| last_name  | "Smith"              |
+| subdomain  | "blog"               |
+| domain     | "janesmith"          |
+| tld        | "com"                |
+| category   | "blog"               |
+| other_tags | ["tech", "futurism"] |

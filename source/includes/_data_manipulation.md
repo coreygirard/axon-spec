@@ -62,3 +62,9 @@ something_build(m, output_spec)
   }
 }
 ```
+
+> Alternate Axon program
+
+```python
+transform(data, input_spec, output_spec)
+```

@@ -5,6 +5,10 @@
 
 ## Null
 
+```c
+null
+```
+
 A value representing the absence of a value. Frequently used in error handling
 
 ## Booleans
