@@ -13,7 +13,6 @@ includes:
   - pipelines
   - data_manipulation
   - itertools
-  - real_world
 
 search: true
 ---
